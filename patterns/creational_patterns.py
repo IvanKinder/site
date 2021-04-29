@@ -14,7 +14,6 @@ class Student(User):
     pass
 
 
-# Абстрактная фабрика
 class UserFactory:
     types = {
         'student': Student,
@@ -65,7 +64,6 @@ class Category:
         return result
 
 
-# Абстрактная фабрика
 class CourseFactory:
     types = {
         'interactive': InteractiveCourse,
@@ -108,3 +106,40 @@ class Engine:
         for course in self.courses:
             if course.name == name:
                 return course
+        return None
+
+    @staticmethod
+    def decode_value(val):
+        val_b = bytes(val.replace('%', '=').replace('+', ' '), 'UTF-8')
+        val_decode_str = quopri.decodestring(val_b)
+        return val_decode_str.decode('UTF-8')
+
+
+# Singleton
+class SingletonByName(type):
+
+    def __init__(cls, name, bases, attrs, **kwargs):
+        super().__init__(name, bases, attrs)
+        cls.__instance = {}
+
+    def __call__(cls, *args, **kwargs):
+        if args:
+            name = args[0]
+        if kwargs:
+            name = kwargs['name']
+
+        if name in cls.__instance:
+            return cls.__instance[name]
+        else:
+            cls.__instance[name] = super().__call__(*args, **kwargs)
+            return cls.__instance[name]
+
+
+class Logger(metaclass=SingletonByName):
+
+    def __init__(self, name):
+        self.name = name
+
+    @staticmethod
+    def log(text):
+        print('log: ', text)

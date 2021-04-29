@@ -6,6 +6,12 @@ routes = {
     '/': Index(),
     '/help/': Help(),
     '/contact_us/': ContactUs(),
+    '/study_programs/': '',
+    '/courses_list/': 'ContactUs()',
+    '/create_course/': 'ContactUs()',
+    '/create_category/': 'ContactUs()',
+    '/categories_list/': 'ContactUs()',
+    '/copy_course/': 'ContactUs()',
 }
 
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    Создать курс
+    Создать категорию
 {% endblock %}
 {% block style %}
     {% include 'inc-style.html' %}
@@ -10,7 +10,7 @@
 {% endblock %}
 {% block body %}
     <div>
-        <a href="/courses_list/?id={{ id }}">Назад</a>
+        <a href="/category_list/">Назад</a>
     </div>
 
     <br>
@@ -18,10 +18,10 @@
     <br>
 
     <div>
-        <h1>Создание курса</h1>
+        <h1>Создание категории: </h1>
         <form method="post">
-            <input type="text" name="name" placeholder="Название курса">
-            <button type="submit">Сохранить и вернуться к списку курсов</button>
+            <input type="text" name="name" placeholder="Название категории">
+            <button type="submit">Сохранить и вернуться на главную</button>
         </form>
     </div>
 {% endblock %}

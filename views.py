@@ -15,12 +15,17 @@ class Index:
 
 class PageNotFound404:
     def __call__(self, request):
-        return '404 BAD REQUEST', 'Page not found'
+        return '404 BAD REQUEST', 'Page not found!'
 
 
 class Help:
     def __call__(self, request):
         return '200 OK', 'some help text'
+
+
+class About:
+    def __call__(self, request):
+        return '200 OK', 'About us'
 
 
 class ContactUs:
@@ -38,9 +43,9 @@ class CoursesList:
         logger.log('Список курсов')
         try:
             category = site.find_category_by_id(int(request['request_params']['id']))
-            return '200 OK', render('course_list.html', objects_list=category.courses, name=category.name, id=category.id)
+            return '200 OK', render('courses_list.html', objects_list=category.courses, name=category.name, id=category.id)
         except KeyError:
-            return '200 OK', 'Нет курсов'
+            return '200 OK', render('courses_list.html', objects_list=['нет курсов'])
 
 
 class CreateCourse:
@@ -69,7 +74,7 @@ class CreateCourse:
 
                 return '200 OK', render('create_course.html', name=category.name, id=category.id)
             except KeyError:
-                return '200 OK', 'Нет категорий'
+                return '200 OK', render('create_course.html', name='Нет категорий')
 
 
 class CreateCategory:
@@ -101,7 +106,7 @@ class CreateCategory:
 class CategoryList:
     def __call__(self, request):
         logger.log('Список категорий')
-        return '200 OK', render('category_list.html', objects_list=site.categories)
+        return '200 OK', render('categories_list.html', objects_list=site.categories)
 
 
 class CopyCourse:
@@ -119,4 +124,4 @@ class CopyCourse:
 
             return '200 OK', render('course_list.html', objects_list=site.courses)
         except KeyError:
-            return '200 OK', 'Нет курсов'
+            return '200 OK', render('course_list.html', objects_list=['Нет курсов'])

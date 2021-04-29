@@ -26,6 +26,7 @@ class Framework:
             data = PostRequests().get_request_params(environ)
             request['data'] = data
             print('Пришел post-запрос: ', Framework.decode_value(data))
+            print('1111', request)
 
         if path[-1] != '/':
             path = path + '/'

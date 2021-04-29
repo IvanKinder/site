@@ -1,17 +1,18 @@
 from random import randint
 
-from views import Index, Help, ContactUs
+from views import Index, Help, ContactUs, StudyPrograms, CoursesList, CreateCourse, CreateCategory, CategoryList, \
+    CopyCourse
 
 routes = {
     '/': Index(),
     '/help/': Help(),
     '/contact_us/': ContactUs(),
-    '/study_programs/': '',
-    '/courses_list/': 'ContactUs()',
-    '/create_course/': 'ContactUs()',
-    '/create_category/': 'ContactUs()',
-    '/categories_list/': 'ContactUs()',
-    '/copy_course/': 'ContactUs()',
+    '/study_programs/': StudyPrograms(),
+    '/courses_list/': CoursesList(),
+    '/create_course/': CreateCourse(),
+    '/create_category/': CreateCategory(),
+    '/categories_list/': CategoryList(),
+    '/copy_course/': CopyCourse(),
 }
 
 

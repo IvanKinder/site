@@ -87,3 +87,36 @@ class CreateCategory:
             category = None
             if category_id:
                 category = site.find_category_by_id(int(category_id))
+
+            new_category = site.create_category(name, category)
+
+            site.categories.append(new_category)
+
+            return '200 OK', render('index.html', objects_list=site.categories)
+        else:
+            categories = site.categories
+            return '200 OK', render('create_category.html', categories=categories)
+
+
+class CategoryList:
+    def __call__(self, request):
+        logger.log('Список категорий')
+        return '200 OK', render('category_list.html', objects_list=site.categories)
+
+
+class CopyCourse:
+    def __call__(self, request):
+        request_params = request['request_params']
+
+        try:
+            name = request_params['name']
+            old_course = site.get_course(name)
+            if old_course:
+                new_name = f'copy_{name}'
+                new_course = old_course.clone()
+                new_course.name = new_name
+                site.courses.append(new_course)
+
+            return '200 OK', render('course_list.html', objects_list=site.courses)
+        except KeyError:
+            return '200 OK', 'Нет курсов'
